@@ -1,0 +1,406 @@
+{% capture positions %}{{ settings.position_1 }},{{ settings.position_2 }},{{ settings.position_3 }},{{ settings.position_4 }},{{ settings.position_5 }},{{ settings.position_6 }},{{ settings.position_7 }},{{ settings.position_8 }},{{ settings.position_9 }},{{ settings.position_10 }},{{ settings.position_11 }},{{ settings.position_12 }},{{ settings.position_13 }},{{ settings.position_14 }},{{ settings.position_15 }},{{ settings.position_16 }}{% endcapture %}
+{% assign positions = positions | split: ',' %}
+
+<div id="slide-1" class="slide {% if settings.banner_video %}header-video{% endif %}">
+  <div class="bcg header-video--media"
+      data-video-src="{{ settings.banner_video_id }}"
+      data-provider="{{ settings.banner_video_source }}"
+      data-video-width="{{ settings.banner_video_width }}"
+      data-video-height="{{ settings.banner_video_height }}"
+      data-video-mp4="{{ settings.banner_video_mp4 }}"
+      data-video-ogv="{{ settings.banner_video_ogv }}"
+      data-center="background-position: 50% 0px;"
+      data-top-bottom="background-position: 50% -200px;"
+      data-anchor-target="#slide-1">
+      <div class="hsContainer" id="video-trigger">
+          <div class="hsContent {{ settings.image_1_text_align }}"
+              data-100-top="opacity: 1"
+              data-25-top="opacity: 0"
+              data-anchor-target="#slide-1 .animated">
+          <div class="{{ settings.headline_animation }} {% if settings.headline_animation != blank %}animated delay-025s{% endif %}">
+                {% if settings.image_1_headline != blank %}
+                  <h1 class="headline" style="color:{{settings.banner_color}}">{{ settings.image_1_headline }}</h1>
+                {% endif %}
+                {% if settings.image_1_subtitle != blank %}
+                  <p class="subtitle" style="color:{{settings.banner_color}}">{{ settings.image_1_subtitle }}</p>
+                {% endif %}
+                {% if settings.image_1_button_text != blank %}
+                  <a href="{{ settings.image_1_link }}" class="action_button">
+                    {{ settings.image_1_button_text }}
+                  </a>
+                {% endif %}
+          </div>
+          {% if settings.homepage_arrow %}
+            <a href="#pagecontent" class="scroll-arrow animated fadeInDown"></a>
+          {% endif %}
+          </div>
+      </div>
+  </div>
+</div>
+<a name="pagecontent" id="pagecontent"></a>
+
+{% for position in positions %}
+  {% if position == "2" %}
+    <div id="slide-2" class="slide">
+        <div class="bcg"
+            data-bottom-top="background-position: 50% 200px;"
+            data-top-bottom="background-position: 50% -200px;"
+            data-anchor-target="#slide-2">
+            <div class="hsContainer">
+                <div class="hsContent {{ settings.image_2_text_align }}">
+                  <div>
+                    <p class="headline" style="color:{{settings.banner_color}}">{{ settings.image_2_headline }}</p>
+                    <p class="subtitle" style="color:{{settings.banner_color}}">{{ settings.image_2_subtitle }}</p>
+                    {% if settings.image_2_button_text != blank %}
+                      <a href="{{ settings.image_2_link }}" class="action_button">
+                        {{ settings.image_2_button_text }}
+                      </a>
+                    {% endif %}
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  {% elsif position == "3" %}
+    <div id="slide-3" class="slide">
+        <div class="bcg"
+            data-bottom-top="background-position: 50% 200px;"
+            data-top-bottom="background-position: 50% -200px;"
+            data-anchor-target="#slide-3">
+            <div class="hsContainer">
+                <div class="hsContent {{ settings.image_3_text_align }}">
+                  <div>
+                    <p class="headline" style="color:{{settings.banner_color}}">{{ settings.image_3_headline }}</p>
+                    <p class="subtitle" style="color:{{settings.banner_color}}">{{ settings.image_3_subtitle }}</p>
+                    {% if settings.image_3_button_text != blank %}
+                      <a href="{{ settings.image_3_link }}" class="action_button">
+                        {{ settings.image_3_button_text }}
+                      </a>
+                    {% endif %}
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  {% elsif position == "4" %}
+    <div id="slide-4" class="slide">
+        <div class="bcg"
+            data-bottom-top="background-position: 50% 200px;"
+            data-top-bottom="background-position: 50% -200px;"
+            data-anchor-target="#slide-4">
+            <div class="hsContainer">
+                <div class="hsContent {{ settings.image_4_text_align }}">
+                  <div>
+                    <p class="headline" style="color:{{settings.banner_color}}">{{ settings.image_4_headline }}</p>
+                    <p class="subtitle" style="color:{{settings.banner_color}}">{{ settings.image_4_subtitle }}</p>
+                    {% if settings.image_4_button_text != blank %}
+                      <a href="{{ settings.image_4_link }}" class="action_button">
+                        {{ settings.image_4_button_text }}
+                      </a>
+                    {% endif %}
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  {% elsif position == "5" %}
+    <div id="slide-5" class="slide">
+        <div class="bcg"
+            data-bottom-top="background-position: 50% 200px;"
+            data-top-bottom="background-position: 50% -200px;"
+            data-anchor-target="#slide-5">
+            <div class="hsContainer">
+                <div class="hsContent {{ settings.image_5_text_align }}">
+                  <div>
+                    <p class="headline" style="color:{{settings.banner_color}}">{{ settings.image_5_headline }}</p>
+                    <p class="subtitle" style="color:{{settings.banner_color}}">{{ settings.image_5_subtitle }}</p>
+                    {% if settings.image_5_button_text != blank %}
+                      <a href="{{ settings.image_5_link }}" class="action_button">
+                        {{ settings.image_5_button_text }}
+                      </a>
+                    {% endif %}
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  {% elsif position == "6" %}
+    <div id="slide-6" class="slide">
+        <div class="bcg"
+            data-bottom-top="background-position: 50% 200px;"
+            data-top-bottom="background-position: 50% -200px;"
+            data-anchor-target="#slide-6">
+            <div class="hsContainer">
+                <div class="hsContent {{ settings.image_6_text_align }}">
+                  <div>
+                    <p class="headline" style="color:{{settings.banner_color}}">{{ settings.image_6_headline }}</p>
+                    <p class="subtitle" style="color:{{settings.banner_color}}">{{ settings.image_6_subtitle }}</p>
+                    {% if settings.image_6_button_text != blank %}
+                      <a href="{{ settings.image_6_link }}" class="action_button">
+                        {{ settings.image_6_button_text }}
+                      </a>
+                    {% endif %}
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  {% elsif position == "7" %}
+    {% assign featured_links_count = settings.featured_links_count | minus: 0 %}
+    <div class="container content" style="padding-top:0">
+      <div class="sixteen columns" id="featured_links">
+        <div class="section clearfix" id="feature">
+          <div class="{% if featured_links_count == 2 %}eight columns{% elsif featured_links_count == 3 %}one-third column{% else %}four columns{% endif %} alpha delay-025s center">
+            {% if settings.feature1_link != blank %}
+              <a href="{{ settings.feature1_link }}">
+            {% endif %}
+
+            <img src="{{ 'feature1.jpg' | asset_url }}" alt="{{ settings.feature1_title }}" />
+
+            {% if settings.feature1_title != blank %}
+              <h2>{{ settings.feature1_title }}</h2>
+              <div class="feature_divider"></div>
+            {% endif %}
+            {% if settings.feature1_link != blank %}
+              </a>
+            {% endif %}
+
+            {% if settings.feature1_description != blank %}
+              <p>{{ settings.feature1_description }}</p>
+            {% endif %}
+          </div>
+
+          <div class="{% if featured_links_count == 2 %}eight columns omega{% elsif featured_links_count == 3 %}one-third column{% else %}four columns{% endif %} delay-05s center">
+            {% if settings.feature2_link != blank %}
+              <a href="{{ settings.feature2_link }}">
+            {% endif %}
+
+            <img src="{{ 'feature2.jpg' | asset_url }}" alt="{{ settings.feature2_title }}" />
+
+            {% if settings.feature2_title != blank %}
+              <h2>{{ settings.feature2_title }}</h2>
+              <div class="feature_divider"></div>
+            {% endif %}
+            {% if settings.feature2_link != blank %}
+              </a>
+            {% endif %}
+
+            {% if settings.feature2_description != blank %}
+              <p>{{ settings.feature2_description }}</p>
+            {% endif %}
+          </div>
+
+          {% if featured_links_count >= 3 %}
+            <div class="{% if featured_links_count == 2 %}eight columns{% elsif featured_links_count == 3 %}one-third column omega{% else %}four columns{% endif %} delay-075s center">
+              {% if settings.feature3_link != blank %}
+                <a href="{{ settings.feature3_link }}">
+              {% endif %}
+
+              <img src="{{ 'feature3.jpg' | asset_url }}" alt="{{ settings.feature3_title }}" />
+
+              {% if settings.feature3_title != blank %}
+                <h2>{{ settings.feature3_title }}</h2>
+                <div class="feature_divider"></div>
+              {% endif %}
+              {% if settings.feature3_link != blank %}
+                </a>
+              {% endif %}
+
+              {% if settings.feature3_description != blank %}
+                <p>{{ settings.feature3_description }}</p>
+              {% endif %}
+            </div>
+          {% endif %}
+
+         {% if featured_links_count == 4 %}
+            <div class="{% if featured_links_count == 2 %}eight columns{% elsif featured_links_count == 3 %}one-third column{% else %}four columns omega{% endif %} delay-1s center">
+              {% if settings.feature4_link != blank %}
+                <a href="{{ settings.feature4_link }}">
+              {% endif %}
+
+              <img src="{{ 'feature4.jpg' | asset_url }}" alt="{{ settings.feature4_title }}" />
+
+              {% if settings.feature4_title != blank %}
+                <h2>{{ settings.feature4_title }}</h2>
+                <div class="feature_divider"></div>
+              {% endif %}
+              {% if settings.feature4_link != blank %}
+                </a>
+              {% endif %}
+
+              {% if settings.feature4_description != blank %}
+                <p>{{ settings.feature4_description }}</p>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% elsif position == "8" and settings.frontpage_linklist != blank %}
+    <div class="container featured_products">
+      <div class="sixteen columns center homepage_content clearfix">
+        {% assign linklist = linklists[settings.frontpage_linklist] %}
+        {% assign collections_per_row = settings.frontpage_collections_per_row %}
+        {% include 'collection-loop' %}
+      </div>
+    </div>
+  {% elsif position == "9" and settings.frontpage_collection != blank %}
+    <div class="container featured_products">
+      <div class="sixteen columns center homepage_content">
+        <h2 class="title"><a href="{{ collections[settings.frontpage_collection].url }}">{{ collections[settings.frontpage_collection].title }}</a></h2>
+        <div class="feature_divider"></div>
+        {% if collections[settings.frontpage_collection].description != blank %}
+          <div class="section clearfix">
+            {{ collections[settings.frontpage_collection].description }}
+          </div>
+        {% endif %}
+        {% assign collection = '' %}
+        {% assign products = collections[settings.frontpage_collection].products %}
+        {% assign products_per_row = settings.frontpage_products_per_row %}
+        {% include 'product-loop' %}
+      </div>
+    </div>
+  {% elsif position == "10" and settings.frontpage_collection2 != blank %}
+    <div class="container featured_products">
+      <div class="sixteen columns center homepage_content">
+        <h2 class="title"><a href="{{ collections[settings.frontpage_collection].url }}">{{ collections[settings.frontpage_collection2].title }}</a></h2>
+        <div class="feature_divider"></div>
+        {% if collections[settings.frontpage_collection2].description != blank %}
+          <div class="section clearfix">
+            {{ collections[settings.frontpage_collection2].description }}
+          </div>
+        {% endif %}
+        {% assign collection = '' %}
+        {% assign products = collections[settings.frontpage_collection2].products %}
+        {% assign products_per_row = settings.frontpage_products_per_row %}
+        {% include 'product-loop' %}
+      </div>
+    </div>
+  {% elsif position == "11" and settings.frontpage_collection_full != blank %}
+    <div class="container">
+      <div class="sixteen columns homepage_content clearfix" itemtype="http://schema.org/ItemList">
+        {% assign collection = '' %}
+        {% assign products = collections[settings.frontpage_collection_full].products %}
+        {% include 'product-full' %}
+      </div>
+    </div>
+  {% elsif position == "12" and settings.homepage1 != blank %}
+    <div class="homepage_content featured_content clearfix content1">
+      <div class="container">
+        <div class="sixteen columns">
+          <div class="section clearfix">
+            {% include 'page-multi-column', content: pages[settings.homepage1].content %}
+          </div>
+        </div>
+      </div>
+    </div>
+  {% elsif position == "13" and settings.homepage2 != blank %}
+    <div class="homepage_content featured_content clearfix content2">
+      <div class="container">
+        <div class="sixteen columns">
+          <div class="section clearfix">
+            {% include 'page-multi-column', content: pages[settings.homepage2].content %}
+          </div>
+        </div>
+      </div>
+    </div>
+  {% elsif position == "14" and settings.homepage3 != blank %}
+    <div class="homepage_content featured_content clearfix content3">
+      <div class="container">
+        <div class="sixteen columns">
+          <div class="section clearfix">
+            {% include 'page-multi-column', content: pages[settings.homepage3].content %}
+          </div>
+        </div>
+      </div>
+    </div>
+  {% elsif position == "15" and settings.blog_widget_select != blank %}
+    <div class="container">
+      <div class="section clearfix homepage_content">
+        <h3 class="title center"><a href="{{ blogs[settings.blog_widget_select].url }}">{{ blogs[settings.blog_widget_select].title }}</a></h3>
+        <div class="feature_divider"></div>
+        {% for article in blogs[settings.blog_widget_select].articles limit: settings.home_page_articles %}
+          <div class="{% if settings.home_page_articles == "2" %}eight columns{% elsif settings.home_page_articles == "3" %}one-third column{% else %}four columns{% endif %} article">
+            {% if article.image %}
+              <a href="{{ article.url }}" title="{{ article.title | escape }}">
+                <img src="{{ article.image | img_url: 'grande' }}" alt="{{ article.title | escape }}" />
+              </a>
+            {% endif %}
+
+            {% if settings.blog_tags %}
+              <div class="blog_meta tags">
+                {% for tag in article.tags %}
+                  <span><a href="{{ shop.url}}/blogs/{{ blogs[settings.blog_widget_select].handle }}/tagged/{{ tag | handleize }}" title="{{ blogs[settings.blog_widget_select].title | escape }} {{ 'blogs.general.tagged' | t }} {{ tag | escape }}">{{ tag }}</a></span>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            <h5 class="sub_title">
+              <a href="{{ article.url }}" title="{{ article.title | escape }}">{{ article.title }}</a>
+            </h5>
+            <p class="blog_meta">
+              {% if settings.blog_author %}
+                <span>{{ 'blogs.article.by_author' | t: author: article.author }}</span>
+              {% endif %}
+
+              {% if settings.blog_date %}
+                <span>{{ article.published_at | date: format: "month_day_year" }}</span>
+              {% endif %}
+
+              {% if settings.blog_comment_count %}
+                {% if settings.disqus_enabled %}
+                  <span>
+                    <a href="{{ article.url }}#disqus_thread" data-disqus-identifier="{{ article.id }}" class="disqus-comment-count">{{ 'blogs.counts.comments_with_count' | t: count: 0 }}</a>
+                  </span>
+                {% elsif article.comments_enabled? and article.comments_count > 0 %}
+                  <span>
+                    <a href="{{ article.url }}#comments">{{ 'blogs.counts.comments_with_count' | t: count: article.comments_count }}</a>
+                  </span>
+                {% endif %}
+              {% endif %}
+            </p>
+
+            {% if article.excerpt != blank %}
+               <div class="excerpt">{{ article.excerpt }}</div>
+            {% endif %}
+            {% if settings.read_more_link %}
+              <p>
+                <a href="{{ article.url }}" title="{{ article.title | escape }}">{{ 'blogs.general.continue_reading_html' | t }} <span class="icon-right-arrow"></span></a>
+              </p>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% elsif position == "16" %}
+    {% if settings.twitter_widget != blank or settings.instagram_widget != blank %}
+      <div class="container">
+        <div class="section clearfix">
+          {% if settings.instagram_widget %}
+            <div class="{% if settings.twitter_widget != blank %}eight{% else %}sixteen{% endif %} columns">
+              <h4 class="title">
+                {% if settings.instagram_link != blank %}
+                  <a href="{{ settings.instagram_link }}" target="_blank">
+                {% endif %}
+                {{ settings.instagram_title }}
+                {% if settings.instagram_link != blank %}
+                  </a>
+                {% endif %}
+              </h4>
+
+              <div id="instafeed" data-client-id="{{ settings.instagram_client_id | strip }}" data-count="{{ settings.instagram_count | strip }}"></div>
+            </div>
+          {% endif %}
+
+          {% if settings.twitter_widget != blank %}
+            <div class="{% if settings.instagram_widget != blank %}eight{% else %}sixteen{% endif %} columns">
+              <h4 class="title"><a href="https://twitter.com/{{ settings.twitter_username | replace: "@", "" | strip }}" target="_blank">{{ settings.twitter_title }}</a></h4>
+              <a class="twitter-timeline" href="https://twitter.com/{{ settings.twitter_username | replace: "@", "" | strip }}" data-theme="{{ settings.twitter_theme }}" data-widget-id="319998048782647298" data-tweet-limit="{{ settings.tweet_count }}" data-screen-name="{{ settings.twitter_username | replace: "@", "" | strip }}" data-chrome="noheader nofooter noborders transparent" data-link-color="{{ settings.link_color }}" data-heading-style="color:{{ settings.link_color }};font-size:{{ settings.regular_font_size }}px;font-family: {{ settings.regular_font | replace: 'Google_', '' | replace: '+', ' ' | replace: '"', '' }}"></a>
+              <script defer>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+  {% endif %}
+{% endfor %}

@@ -1,0 +1,20 @@
+<ul data-money-format="{{ shop.money_format }}" data-shop-currency="{{ shop.currency }}" data-shop-name="{{ shop.name | escape }}">
+  {% if cart.item_count == 0 %}
+  <li class="empty_cart">{{ 'layout.general.empty_cart' | t }}</li>
+  {% else %}
+
+  <li class="cart_item {% if forloop.last %}last_cart_item{% endif %}">
+    <p class="mm-counter1">
+      <span class="ss-icon minus" id="{{item.variant_id}}">&#x002D;</span><input type="number" min="0" class="quantity" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" /><span class="ss-icon plus" id="{{item.variant_id}}">&#x002B;</span>
+    </p>
+
+  </li>
+
+  {% endif %}
+</ul>
+
+<style>
+div#quantity_1 ul {
+    margin-left: 0px;
+}
+</style>

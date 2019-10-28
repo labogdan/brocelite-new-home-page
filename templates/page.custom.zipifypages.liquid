@@ -1,0 +1,525 @@
+{% assign zp_use_favicon = false %}{% assign zp_use_meta_tags = false %}{% assign zp_use_open_graph_tags = false %}
+
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="{{ shop.locale }}"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="{{ shop.locale }}"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="{{ shop.locale }}"> <![endif]-->
+<!--[if IE 9 ]><html class="ie ie9" lang="{{ shop.locale }}"> <![endif]-->
+<!--[if (gte IE 10)|!(IE)]><!--><html lang="{{ shop.locale }}"> <!--<![endif]-->
+  <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KVJFJLC');</script>
+    <!-- End Google Tag Manager -->
+  {% include 'storakle' %}
+    <meta charset="utf-8">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="robots" content="index,follow">
+
+    {% if current_tags %}{% assign meta_tags = current_tags | join: ', ' %}{% endif %}
+    <title>{% if template contains "index" %}{{ page_title }}{% else %}{{ page_title }}{% if current_tags %} {{ 'general.meta.tagged_html' | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} {{ 'general.meta.page' | t: page_number: current_page }}{% endif %}{% unless page_title contains shop.name %} - {{ shop.name }}{% endunless %}{% endif %}</title>
+
+    {% if page_description %}
+      {%- comment %}<locksmith:7580>{% endcomment -%}
+        {%- include 'locksmith-variables', locksmith_hiding_scope: 'resource' %}{% if locksmith_transparent %}<meta name="description" content="{{ page_description | escape }}{% if current_tags %} {{ 'general.meta.tagged_html' | t: tags: meta_tags | escape }}.{% endif %}{% if current_page != 1 %} {{ 'general.meta.page' | t: page_number: current_page }}.{% endif %}" />{% endif -%}
+        {%- comment %}original: <meta name="description" content="{{ page_description | escape }}{% if current_tags %} {{ 'general.meta.tagged_html' | t: tags: meta_tags | escape }}.{% endif %}{% if current_page != 1 %} {{ 'general.meta.page' | t: page_number: current_page }}.{% endif %}" />{%- endcomment %}
+      {%- comment %}</locksmith:7580>{% endcomment -%}
+    {% endif %}
+
+    <!-- Custom Fonts -->
+    {% if settings.logo_font contains 'Google' or settings.headline_font contains 'Google' or settings.nav_font contains 'Google' or settings.slideshow_subtitle_font contains 'Google' or settings.regular_font contains 'Google' %}
+      <link href="//fonts.googleapis.com/css?family=.|{% if settings.logo_font contains 'Google' %}{{ settings.logo_font | replace: 'Google_', '' }}:light,normal,bold|{% endif %}{% if settings.headline_font contains 'Google' %}{{ settings.headline_font | replace: 'Google_', '' }}:light,normal,bold|{% endif %}{% if settings.nav_font contains 'Google' %}{{ settings.nav_font | replace: 'Google_', '' }}:light,normal,bold|{% endif %}{% if settings.slideshow_subtitle_font contains 'Google' %}{{ settings.slideshow_subtitle_font | replace: 'Google_', '' }}:light,normal,bold|{% endif %}{% if settings.regular_font contains 'Google' %}{{ settings.regular_font | replace: 'Google_', ''  }}:light,normal,bold{% endif %}" rel="stylesheet" type="text/css" />
+    {% endif %}
+
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,700" rel="stylesheet">
+
+
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css">-->
+
+    {{ 'bulma.css' | asset_url | stylesheet_tag }}
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+
+
+    {% include 'social-meta-info' %}
+
+    {% if collection.previous_product %}
+      <link rel="prev" href="{{ collection.previous_product }}">
+    {% endif %}
+    {% if collection.next_product %}
+      <link rel="next" href="{{ collection.next_product }}">
+    {% endif %}
+
+    <!-- Mobile Specific Metas -->
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="{{ settings.shop_bg_color }}">
+
+    <!-- Stylesheets for Parallax 2.4.4 -->
+    {{ 'styles.scss.css' | asset_url | stylesheet_tag }}
+    {{ 'flexslider.css' | asset_url | stylesheet_tag }}
+    <link rel="shortcut icon" type="image/x-icon" href="{{ 'favicon.png' | asset_url }}">
+    <link rel="canonical" href="{{ canonical_url }}" />
+
+    {% if template contains 'customer' %}
+      {{ "shopify_common.js" | shopify_asset_url | script_tag }}
+      {{ "customer_area.js"  | shopify_asset_url | script_tag }}
+    {% endif %}
+
+    {{ 'app.js' | asset_url | script_tag }}
+
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.3.3/dist/semantic.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js"></script>
+
+    <script type="text/javascript" charset="utf-8">
+  $(window).load(function() {
+/*  $('.flexslider').flexslider({
+    controlNav: false,
+    directionNav: true,
+    prevText: "",
+    nextText: "",
+  });*/
+});
+</script>
+
+    <!--[if lte IE 8]>
+      {{ 'ie.css' | asset_url | stylesheet_tag }}
+      {{ 'skrollr.ie.js' | asset_url | script_tag }}
+    <![endif]-->
+
+    {% comment %}{{ content_for_header }}{% endcomment %}{% capture zp_include_html %}{% include 'header-scripts.zipifypages' %}{% endcapture %}{% unless zp_include_html contains 'Liquid error: Could not find asset snippets/header-scripts.zipifypages.liquid' or zp_include_html contains 'Liquid error: Could not find asset snippets/page-content-parser.zipifypages.liquid' %}{{ zp_include_html | strip }}{% assign zp_include_html = '' %}{% endunless %}
+{%- include 'bold-common' -%}
+{%- include 'bold-product' with product, hide_action: 'header' -%}
+  <script type='text/javascript'>var jiltStorefrontParams = {{ shop.metafields.jilt_storefront | json }}; {% if customer %}jiltStorefrontParams.customerID = {{ customer.id }};{% endif %}</script>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
+
+
+</head>
+{% if template contains "index" %}
+    {% assign feature_image = true %}
+  {% elsif template contains "collection" and settings.slideshow_collection_enabled %}
+    {% assign feature_image = true %}
+  {% elsif template contains "blog" %}
+    {% assign feature_image = true %}
+  {% elsif template contains "article" %}
+    {% assign feature_image = false %}
+  {% elsif template contains "product" %}
+    {% assign feature_image = true %}
+  {% elsif template contains "how-it-works" %}
+    {% assign feature_image = true %}
+  {% elsif template contains "faqs" %}
+    {% assign feature_image = true %}
+  {% elsif template contains "returns" %}
+    {% assign feature_image = true %}
+  {% elsif template contains "about" %}
+    {% assign feature_image = true %}
+  {% elsif template contains "video" %}
+    {% assign feature_image = true %}
+  {% elsif template contains "science" %}
+    {% assign feature_image = true %}
+  {% elsif template contains "privacy" %}
+    {% assign feature_image = true %}
+  {% elsif template contains "terms" %}
+    {% assign feature_image = true %}
+  {% elsif template contains "contact" %}
+    {% assign feature_image = true %}
+  {% else %}
+    {% assign feature_image = false %}
+  {% endif %}
+  <body class="{{ template | replace: '.', '-' | handle }} {% if feature_image %}feature_image{% endif %}">
+    <div id="content_wrapper">
+      {% if settings.promo_text != blank %}
+        {% if template contains "index" and settings.promo_home_page %}
+          <div class="promo_banner">
+            {{ settings.promo_text }}
+          </div>
+        {% elsif settings.promo_home_page == false %}
+          <div class="promo_banner">
+            {{ settings.promo_text }}
+          </div>
+        {% endif %}
+      {% endif %}
+      <div {% if template contains "contact" %}style="background-color: #e6e6e6;"{% endif %}>
+
+      {% if template contains "landing" %}
+      {% else %}
+        <div id="header" class="mm-fixed-top">
+          <a href="#nav" class="icon-menu"></a>
+          <a href="{{ shop.url }}" title="{{ shop.name }}" class="mobile_logo logo is-hidden-mobile-small">
+                  <img src="{{ 'BrocElite-Logo-No-Icons.png' | asset_url }}" alt="{{ shop.name }}" />
+          </a>
+          <a href="#cart" class="icon-cart right"><span>{{ cart.item_count }}</span></a>
+
+            <button class="button is-link  is-small mini right header-shop-button" onclick="window.location.href='/collections/shop'" >SHOP NOW</button>
+
+        </div>
+        {% endif %}
+        {% if template contains "landing" %}
+        {% else %}
+        <div class="hidden">
+          <div id="nav">
+            {% if customer.tags contains "wholesale" %}
+				<ul class="wholesale-menu">
+              {% for link in linklists.main-menu-wholesale.links %}
+                {%- comment %}<locksmith:d7f8>{% endcomment -%}
+                  {%- include 'locksmith-variables', locksmith_scope: 'subject', locksmith_subject: link, locksmith_subject_parent: linklists.main-menu-wholesale %}{% if locksmith_transparent %}{% else %}{% continue %}{% endif -%}
+                {%- comment %}</locksmith:d7f8>{% endcomment -%}
+                {% if linklists[link.handle] == empty %}
+                  <li {% if link.active %}class="Selected"{% endif %}><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {% else %}
+                  <li {% if link.active %}class="Selected"{% endif %}><span>{{ link.title }}</span>
+                    <ul>
+                      {% for link in linklists[link.handle].links %}
+                        {%- comment %}<locksmith:5243>{% endcomment -%}
+                          {%- include 'locksmith-variables', locksmith_scope: 'subject', locksmith_subject: link, locksmith_subject_parent: linklists[link.handle] %}{% if locksmith_transparent %}{% else %}{% continue %}{% endif -%}
+                        {%- comment %}</locksmith:5243>{% endcomment -%}
+                        {% if linklists[link.handle] == empty %}
+                          <li {% if link.active %}class="Selected"{% endif %}><a href="{{ link.url }}">{{ link.title }}</a></li>
+                        {% else %}
+                        <li {% if link.active %}class="Selected"{% endif %}><span>{{ link.title }}</span>
+                          <ul>
+                            {% for link in linklists[link.handle].links %}
+                              {%- comment %}<locksmith:95f4>{% endcomment -%}
+                                {%- include 'locksmith-variables', locksmith_scope: 'subject', locksmith_subject: link, locksmith_subject_parent: linklists[link.handle] %}{% if locksmith_transparent %}{% else %}{% continue %}{% endif -%}
+                              {%- comment %}</locksmith:95f4>{% endcomment -%}
+                              <li {% if link.active %}class="Selected"{% endif %}><a href="{{ link.url }}">{{ link.title }}</a></li>
+                            {% endfor %}
+                          </ul>
+                        </li>
+                        {% endif %}
+                      {% endfor %}
+                    </ul>
+                  </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+              {% else %}
+            <ul>
+                            {% for link in linklists[settings.main_linklist].links %}
+                {%- comment %}<locksmith:dd0a>{% endcomment -%}
+                  {%- include 'locksmith-variables', locksmith_scope: 'subject', locksmith_subject: link, locksmith_subject_parent: linklists[settings.main_linklist] %}{% if locksmith_transparent %}{% else %}{% continue %}{% endif -%}
+                {%- comment %}</locksmith:dd0a>{% endcomment -%}
+                {% if linklists[link.handle] == empty %}
+                  <li {% if link.active %}class="Selected"{% endif %}><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {% else %}
+                  <li {% if link.active %}class="Selected"{% endif %}><span>{{ link.title }}</span>
+                    <ul>
+                      {% for link in linklists[link.handle].links %}
+                        {%- comment %}<locksmith:c7c1>{% endcomment -%}
+                          {%- include 'locksmith-variables', locksmith_scope: 'subject', locksmith_subject: link, locksmith_subject_parent: linklists[link.handle] %}{% if locksmith_transparent %}{% else %}{% continue %}{% endif -%}
+                        {%- comment %}</locksmith:c7c1>{% endcomment -%}
+                        {% if linklists[link.handle] == empty %}
+                          <li {% if link.active %}class="Selected"{% endif %}><a href="{{ link.url }}">{{ link.title }}</a></li>
+                        {% else %}
+                        <li {% if link.active %}class="Selected"{% endif %}><span>{{ link.title }}</span>
+                          <ul>
+                            {% for link in linklists[link.handle].links %}
+                              {%- comment %}<locksmith:b0ce>{% endcomment -%}
+                                {%- include 'locksmith-variables', locksmith_scope: 'subject', locksmith_subject: link, locksmith_subject_parent: linklists[link.handle] %}{% if locksmith_transparent %}{% else %}{% continue %}{% endif -%}
+                              {%- comment %}</locksmith:b0ce>{% endcomment -%}
+                              <li {% if link.active %}class="Selected"{% endif %}><a href="{{ link.url }}">{{ link.title }}</a></li>
+                            {% endfor %}
+                          </ul>
+                        </li>
+                        {% endif %}
+                      {% endfor %}
+                    </ul>
+                  </li>
+                {% endif %}
+              {% endfor %}
+              {% if shop.customer_accounts_enabled %}
+                {% if customer %}
+                  <li style="padding: 5px;">
+                    <a href="/account">{{ customer.name }}</a>
+                  </li>
+                  <li style="padding: 5px;">
+                    {{ 'layout.customer.log_out' | t | customer_logout_link }}
+                  </li>
+                {% else %}
+                  <li style="padding: 5px;">
+                    {{ 'layout.customer.log_in' | t | customer_login_link }}
+                  </li>
+                {% endif %}
+              {% endif %}
+              </ul>
+              {% endif %}
+          </div>
+
+          <form action="/checkout" method="post" id="cart">
+            <ul data-money-format="{{ shop.money_format }}" data-shop-currency="{{ shop.currency }}" data-shop-name="{{ shop.name | escape }}">
+              <li class="mm-subtitle"><a class="continue ss-icon" href="#cart">&#x2421;</a></li>
+
+              {% if cart.item_count == 0 %}
+                <li class="empty_cart">{{ 'layout.general.empty_cart' | t }}</li>
+              {% else %}
+                {% for item in cart.items %}
+                  <li class="cart_item {% if forloop.last %}last_cart_item{% endif %}">
+                    <p class="mm-counter">
+                      <span class="ss-icon minus">&#x002D;</span><input type="number" min="0" class="quantity" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" /><span class="ss-icon plus">&#x002B;</span>
+                    </p>
+                    <a href="{{ item.url }}">
+                      {% if item.image %}
+                        <div class="cart_image">
+                          <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}" />
+                        </div>
+                      {% endif %}
+                      <div class="item_title">{{ item.title }}</div>
+                      <strong class="price">{{ item.price | money }}</strong>
+                    </a>
+                  </li>
+                {% endfor %}
+                <li class="mm-label">
+                  <p class="mm-counter">{{ cart.total_price | money }}</p>
+                  <a href="/cart">
+                    <strong>{{ 'layout.general.subtotal' | t }}</strong>
+                  </a>
+                </li>
+
+                <li class="mm-subtitle clearfix">
+                  {% if settings.display_special_instructions %}
+                    <textarea id="note" name="note" rows="2" placeholder="{{ 'layout.general.cart_note' | t }}" class="clearfix">{{ cart.note }}</textarea>
+                  {% endif %}
+
+                  {% if settings.display_tos_checkbox %}
+                    <p class="tos">
+                      <input type="checkbox" class="tos_agree" id="sliding_agree" required />
+                      <label class="tos_label" for="sliding_agree">
+                        {{ 'cart.general.agree_to_terms_html' | t }}
+                      </label>
+                    </p>
+                  {% endif %}
+
+                  <input type="submit" class="action_button right" value="{{ 'layout.general.checkout' | t }}" />
+                  <a href="javascript:void(0)" class="action_button edit_cart right">{{ 'layout.general.continue_shopping' | t }}</a>
+                </li>
+              {% endif %}
+            </ul>
+          </form>
+        </div>
+
+        {% if template contains "collection" %}
+        {% endif %}
+          <nav class="navbar is-hidden-mobile is-hidden-tablet-only" style="z-index:1000;">
+          <div class="container">
+
+
+
+          <div class="navbar-brand">
+            <a class="navbar-item" href="{{ shop.url }}" title="{{ shop.name }}">
+              <img src="{{ 'logo-2018-black.png' | asset_url }}" alt="{{ shop.name }}">
+            </a>
+
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+            </a>
+          </div>
+
+          <div class="navbar-menu">
+
+            <div class="navbar-end">
+
+            <a class="navbar-item" href="/account" title="{{ 'layout.customer.my_account' | t }} {% if customer %}({{ customer.email }}){% endif %}">{% if customer %}{{ 'layout.customer.my_account' | t }}{% else %}{{ 'layout.customer.log_in' | t }}{% endif %}</a>
+            {% if settings.search_enabled %}
+            <a class="navbar-item" href="/search" title="{{ 'general.search.title' | t }}" class="icon-search" id="search-toggle"></a>
+            {% endif %}
+
+            {% if customer.tags contains "wholesale" %}
+
+              {% for link in linklists.main-menu-wholesale.links %}
+                {%- comment %}<locksmith:4d4a>{% endcomment -%}
+                  {%- include 'locksmith-variables', locksmith_scope: 'subject', locksmith_subject: link, locksmith_subject_parent: linklists.main-menu-wholesale %}{% if locksmith_transparent %}{% else %}{% continue %}{% endif -%}
+                {%- comment %}</locksmith:4d4a>{% endcomment -%}
+                {% if linklists[link.handle] == empty %}
+                  <a href="{{ link.url }}" class="navbar-item {% if link.active %}active{% endif %}">{{ link.title }}</a>
+                {% else %}
+                  <div class="navbar-item has-dropdown is-hoverable">
+                    <a href="{{ link.url }}" class="navbar-link {% if link.active %}active{% endif %}">{{ link.title }}</a>
+                    <div class="navbar-dropdown">
+                      <a class="navbar-item" href="{{ link.url }}">{{ link.title }}</a>
+                    </div>
+                {% endif %}
+              {% endfor %}
+
+
+            {% else %}
+
+            {% for link in linklists[settings.main_linklist].links %}
+              {%- comment %}<locksmith:3ce3>{% endcomment -%}
+                {%- include 'locksmith-variables', locksmith_scope: 'subject', locksmith_subject: link, locksmith_subject_parent: linklists[settings.main_linklist] %}{% if locksmith_transparent %}{% else %}{% continue %}{% endif -%}
+              {%- comment %}</locksmith:3ce3>{% endcomment -%}
+              {% if linklists[link.handle] == empty %}
+                <a href="{{ link.url }}" class="navbar-item {% if link.active %}active{% endif %}">{{ link.title }}</a>
+              {% else %}
+                <div class="navbar-item has-dropdown is-hoverable">
+                  <a href="{{ link.url }}" class="navbar-link {% if link.active %}active{% endif %}">{{ link.title }}</a>
+                  <div class="navbar-dropdown">
+                  {% if linklists[link.handle] != empty %}
+                    {% for link in linklists[link.handle].links %}
+                      {%- comment %}<locksmith:122a>{% endcomment -%}
+                        {%- include 'locksmith-variables', locksmith_scope: 'subject', locksmith_subject: link, locksmith_subject_parent: linklists[link.handle] %}{% if locksmith_transparent %}{% else %}{% continue %}{% endif -%}
+                      {%- comment %}</locksmith:122a>{% endcomment -%}
+                      <a class="navbar-item" href="{{ link.url }}">{{ link.title }}</a>
+                    {% endfor %}
+                    </div>
+              {% endif %}
+
+                </div>
+              {% endif %}
+            {% endfor %}
+            {% endif %}
+
+            {% if cart.item_count > 0 %}
+              <a href="#cart" style="padding-top:4%;" class="icon-cart cart-button"><span>{{ cart.item_count }}</span></a>
+            {% else %}
+              <a href="#cart" style="padding-top:4%;" class="icon-cart cart-button"><span> </span></a>
+            {% endif %}
+
+            {% if customer.tags contains "wholesale" %}
+               <a class="navbar-item" href="/collections/all">
+                <button class="button is-link">SHOP NOW</button>
+               </a>
+            {% else %}
+              <a class="navbar-item" href="/collections/shop">
+                <button class="button is-link">SHOP NOW</button>
+              </a>
+            {% endif %}
+
+
+            </div>
+
+
+
+          </div>
+
+
+          </div>
+
+          </nav>
+        </div>
+{% endif %}
+
+        {% unless feature_image %}
+        {% if template contains 'contact' %}
+          <div class="container main content contact">
+        {% elsif template contains "landing" %}
+          <div class="container main content-less-pad-top">
+        {% else %}
+          <div class="container main content">
+        {% endif %}
+
+        {% endunless %}
+
+        {% if template contains 'list-collections' %}
+          {% include 'collection-listing' %}
+        {% else %}
+          {% comment %}{{ content_for_layout }}{% endcomment %}{% capture zp_include_html %}{% include 'page-content.zipifypages' %}{% endcapture %}{% if zp_include_html contains 'Liquid error: Could not find asset snippets/page-content.zipifypages.liquid' %}{{ page.content | strip }}{% else %}{{ zp_include_html | strip }}{% endif %}{% assign zp_include_html =  %}
+        {% endif %}
+
+        </div>
+        <div class="footer {% if template contains 'index' %}home-footer{% endif %}">
+
+
+          <div class="container">
+
+            <div class="ten columns alpha" id="footer-menu">
+              {% if settings.footer_linklist_1 != blank %}
+
+                <ul class="footer_menu">
+                  {% for link in linklists[settings.footer_linklist_1].links %}
+                    {%- comment %}<locksmith:1623>{% endcomment -%}
+                      {%- include 'locksmith-variables', locksmith_scope: 'subject', locksmith_subject: link, locksmith_subject_parent: linklists[settings.footer_linklist_1] %}{% if locksmith_transparent %}{% else %}{% continue %}{% endif -%}
+                    {%- comment %}</locksmith:1623>{% endcomment -%}
+                    <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </div>
+
+             <div class="six columns omega">
+
+             {% if template contains "video" %}
+                <h6>Sign Up for clinician emails &amp; discounts</h6>
+                {% include 'newsletter-hpl' %}
+             {% else %}
+                <h6>Get Health Tips, Promotions &amp; More</h6>
+                {% include 'newsletter' %}
+             {% endif %}
+
+              <p class="mobile_only">
+                {% if settings.show_multiple_currencies %}
+                  <label for="currencies">{{ 'layout.general.pick_a_currency' | t }}: </label>
+                  {% include 'currencies-switcher' %}
+                {% endif %}
+              </p>
+
+              <!--<p class="credits">
+                &copy; {{ "now" | date: "%Y" }} {{ shop.name | link_to: '/' }}.
+                {{ settings.copyright_text }}
+              </p>-->
+
+              {% if settings.display_payment_methods %}
+                <div class="payment_methods">
+                  {% for type in shop.enabled_payment_types %}
+                    <img src="{{ type | payment_type_img_url }}" alt="{{ type | replace: "_", " " | capitalize }}" />
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <div id="search" class="animated">
+          <div class="container">
+            <div class="ten columns offset-by-three center">
+              <form action="/search">
+                {% if settings.search_option != 'everything' %}
+                  <input type="hidden" name="type" value="product" />
+                {% endif %}
+                <div class="search-close ss-icon">&#x2421;</div>
+                <span class="icon-search search-submit"></span>
+                <input type="text" name="q" placeholder="{{ 'general.search.placeholder_with_shop_name' | t: shop_name: shop.name }}" value="{% if search and search.results.first.price %}{{ search.terms }}{% endif %}" autocapitalize="off" autocomplete="off" autocorrect="off" />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% if template contains "product" and settings.size_chart != blank %}
+      <div id="size-chart">
+        <h5 class="center">{{ pages[settings.size_chart].title }}</h5>
+        <div class="feature_divider"></div>
+        {{ pages[settings.size_chart].content }}
+      </div>
+    {% endif %}
+    {% include 'newsletter-popup' %}
+    {% include 'currencies' %}
+
+    {% include 'toggle-plugin' %}
+
+
+    {% if settings.disqus_enabled and settings.blog_comment_count %}
+      {% if template contains "blog" or template contains "article" or template contains "index" %}
+        <script id="dsq-count-scr" src="//{{ settings.disqus_shortname }}.disqus.com/count.js" async></script>
+      {% endif %}
+    {% endif %}
+  {% include 'subscription-theme-footer' %}
+  <script type="text/javascript" charset="utf-8">
+    var shappify_customer_tags = {{ customer.tags | json }}
+  </script>
+{% capture zp_include_html %}{% include 'page-footer.zipifypages' %}{% endcapture %}{% unless zp_include_html contains 'Liquid error: Could not find asset snippets/page-footer.zipifypages.liquid' %}{{ zp_include_html | strip }}{% assign zp_include_html = '' %}{% endunless %}</body>
+</html>
+
+{% layout none %}

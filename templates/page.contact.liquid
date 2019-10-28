@@ -1,0 +1,88 @@
+<div class="contact_image_area">
+  <div class="container columns contact_text is-multiline">
+    <div class="column is-12">
+      <h1 class="center">{{page.title}}</h1>
+    </div>
+
+    <div class="column is-6">
+
+    {% form 'contact' %}
+      {% if form.posted_successfully? %}
+        <p class="quote">{{ 'contact.form.post_success' | t }}</p>
+      {% endif %}
+
+      {% if form.errors %}
+        <p class="quote">{{ 'general.forms.post_error' | t }}</p>
+
+       {% assign message = 'contact.form.message' | t %}
+        <ul class="center">
+          {% for field in form.errors %}
+            {% if field == 'form' %}
+              <li>
+                {{ form.errors.messages[field] }}
+              </li>
+            {% else %}
+              <li>
+                {% assign field_name = field | replace: 'body', message %}
+                {{ 'general.forms.post_field_error_html' | t: field: field_name, error: form.errors.messages[field] }}
+              </li>
+            {% endif %}
+          {% endfor %}
+         </ul>
+      {% endif %}
+
+    <div class="contact-form">
+        {% assign name_attr = 'contact.form.name' | handle %}
+        <label for="contactFormName">Name <span class="red">*</span></label>
+        <input type="text" id="contactFormName" name="contact[{{ name_attr }}]" placeholder="" autocapitalize="words" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.name }}{% endif %}" required="required">
+       </div>
+       <div class="">
+        <label for="contactFormEmail">Email <span class="red">*</span></label>
+        <input type="email" id="contactFormEmail" name="contact[email]" placeholder="" autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" required="required">
+       </div>
+       {% comment %}
+        {% assign name_attr = 'contact.form.phone' | t | handle %}
+        <label for="contactFormPhone" class="hidden-label">{{ 'contact.form.phone' | t }}</label>
+        <input type="tel" id="contactFormPhone" name="contact[{{ name_attr }}]" placeholder="" pattern="[0-9\-]*" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.phone }}{% endif %}">
+        {% endcomment %}
+
+      <label for="contactFormMessage">Message <span class="red">*</span></label>
+      <textarea rows="5" id="contactFormMessage" name="contact[body]" placeholder="" required="required">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+
+      <button class="ui inverted button" value="{{ 'contact.form.send' | t }}">Send</button>
+    {% endform %}
+  </div>
+  <div class="column is-6">
+    <div class="white_background contact_text">
+
+      <div class="columns">
+        <div class="is-12 column">
+          <div class="center position-relative">
+              <img src="{{ 'green-arrow.png' | asset_url }}" class="green-arrow" >
+
+              <span class="center green-text">Connect With Us</span>
+          </div>
+          <br clear="both" />
+        </div>
+      </div>
+
+      <div class="columns">
+        <div class="is-7 column add-margin">
+          {{ page.content }}
+        </div>
+        <div class="is-5 column add-margin">
+          <img style="width:100px;" src="{{ 'contact-guy-with-clipboard.png' | asset_url }}" class="tablet hidden">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="ui grid stackable">
+      <div class="sixteen wide column" style="padding-right:0;padding-left:0; margin-top:15px;">
+        <a href="/pages/faq" class="faq-link-new">Here are a few questions we often hear!</a>
+      </div>
+    </div>
+
+
+  </div>
+</div>

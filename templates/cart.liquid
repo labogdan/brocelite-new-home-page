@@ -1,0 +1,231 @@
+{%- include 'bold-cart' -%}
+{% include 'subscription-cart-footer' %}
+  <div class="sixteen columns clearfix collection_nav">
+    <h1 class="center shopping-title">{{ 'cart.general.title' | t }}</h1>
+    <div class="feature_divider"></div>
+  </div>
+<div class="center cart-headline">
+  <h2>IT’S TIME TO LIVE INFLAMMATION FREE LIFE!</h2>
+  <h5>Discover What Brocelite Can Do For You!</h5>
+</div> 
+  
+  {% if cart.item_count == 0 %}
+    <div class="sixteen columns">
+      <div class="section clearfix">
+        <p class="quote">{{ 'cart.general.continue_browsing_html' | t }}</p>
+        <br class="clear" />
+
+        {% assign collection = '' %}
+        {% assign products = collections[settings.frontpage_collection].products %}
+        {% assign products_per_row = settings.frontpage_products_per_row %}
+        {% include 'product-loop' %}
+      </div>
+    </div>
+  {% else %}
+
+  <form action="/cart" method="post" id="cart_form">
+    <div class="section clearfix columns">
+      <div class="column is-8 cart_items">
+       
+        {% for item in cart.items %}
+{%- include 'bold-cart-item' with item -%}
+          <div class="five columns alpha" id="{{item.variant_id}}">
+            <a href="{{ item.url }}" title="{{ item.title | escape }}" class="cart_page_image">
+              <img src="{{ item | img_url: 'medium' }}" data-src="{{ item | img_url: 'medium' }}" data-src-retina="{{ item | img_url: 'grande' }}" alt="{{ item.title | escape }}" />
+            </a>
+            <div class="five omega">
+            <p class="title-product">
+              <a href="{{ item.url }}">
+                {{ item.product.title }}
+              </a>
+            </p>
+
+            {% unless item.variant.title contains 'Default' %}
+              <p class="meta">
+                {% for option in item.product.options %}
+                  <span class="label">{{ option }}:</span> <span>{{ item.variant.options[forloop.index0] }}</span></br>
+                {% endfor %}
+              </p>
+            {% endunless %}
+
+            {% comment %}{% if item.properties %}
+              <p>
+                {% for p in item.properties %}
+                  {% unless p.last == blank or p.first == "subscription_id" or p.first == "shipping_interval_frequency" or p.first == "shipping_interval_unit_type" %}
+                    {% if p.last contains '/uploads/' %}
+                      {{ p.first }}: <a class="lightbox" href="{{ p.last }}">{{ 'cart.general.uploaded_file' | t }}</a><br />
+                    {% else %}
+                      {{ p.first }}: {{ p.last }}<br />
+                    {% endif %}
+                  {% endunless %}
+                {% endfor %}
+              </p>
+            {% endif %}
+{%  endcomment%}
+            <p class="price_total">
+              {% if bold_item_price > 0 %}
+                {{ bold_item_price | money_with_currency }}
+              {% else %}
+                {{ settings.free_price_text }}
+              {% endif %}
+            </p>
+			
+            <div class="quantity-cart" id="quantity_{{ forloop.index }}">
+              <label for="updates_{{ item.id }}" class="quantity_label">{{ 'cart.general.quantity' | t }}:</label>
+              {% include 'product-quantity' %}
+            </div>
+
+            <p class="remove_item">
+              <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" title="{{ 'cart.general.remove' | t }}">{{ 'cart.general.remove' | t }}</a>
+            </p>
+          </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="is-4 column offset-by-one subtotal-cart">
+        <h4 class="subtotal">
+          {{ 'cart.general.subtotal' | t }}
+        </h4>
+
+        <p class="subtotal_amount">
+          <strong>Total Price:</strong>
+          <strong class="cart-price">{{ bold_cart_total_price | money_with_currency }}</strong>
+          {% comment %}
+          <small id="estimated-shipping" style="display:none">+ <em>{{ 0 | money }} {{ 'cart.shipping_calculator.estimated_shipping' | t }}</em></small>
+          {% endcomment %}
+
+         {%  comment %} <small class="excluding_tax"><em>{{ 'cart.general.excluding_tax_shipping' | t }}</em></small>{% endcomment %}
+        </p>
+
+        {% if settings.show_multiple_currencies %}
+          <p>
+            <small>
+              {{ 'cart.general.orders_processed_in_currency_html' | t: currency: shop.currency }}
+            </small>
+          </p>
+        {% endif %}
+
+        {% if settings.display_special_instructions %}
+          <label for="note">{{ 'cart.general.note' | t: shop_name: shop.name }}:</label>
+          <textarea id="note" name="note" rows="2">{{ cart.note }}</textarea>
+        {% endif %}
+
+        {% if settings.display_tos_checkbox %}
+          <p>
+            <input type="checkbox" class="tos_agree" id="cart_agree" required />
+            <label class="tos_label" for="cart_agree">
+              {{ 'cart.general.agree_to_terms_html' | t }}
+            </label>
+          </p>
+        {% endif %}
+
+        <p>
+          <input type="submit" class="button is-link" id="checkout" name="checkout" value="{{ 'cart.general.checkout' | t }}" />
+        </p>
+
+        {% if content_for_additional_checkout_buttons and settings.cart_action != 'ajax' %}
+          <div class="additional-checkout-buttons">
+            {{ content_for_additional_checkout_buttons | google_button_options: 'transparent' }}
+          </div>
+        {% endif %}
+
+        {% if cart.item_count > 0 %}
+          <p class="continue_shopping">
+            <a href="{% if cart.items.first.product.collections != blank %}{{ cart.items.first.product.collections.last.url }}{% else %}/collections/all{% endif %}">{{ 'cart.general.continue_shopping_link_html' | t }}</a>
+          </p>
+        {% endif %}
+      </div>
+</div>
+<div class="column is-6 section clearfix shopping-guarantee">
+  <h2>Guarantee:</h2>
+  <p>We believe that you will see a real difference in your health once you start taking BrocElite regularly.</p>
+  <p>That is why we are happy to offer you a 100% money-back guarantee.</p>
+  <p>If for any reason you are not satisfied with your purchase, we will refund you, no questions asked.</p>
+	
+</div>
+<div class="column is-6 add-img">
+<img src="{{ 'john-painting-guarantee-seal-2.png' | asset_img_url: 'master' }}" />
+</div>
+  </form>
+
+  {% include 'cart-shipping-calculator' %}
+
+{% endif %}
+
+
+<script>
+  $(document).ready(function(){
+    $('.plus').click(function(e){
+      e.preventDefault();
+      var item_id = $(this).attr('id');
+      $.ajax({
+        type: 'POST',
+        url: '/cart/update.js',
+        dataType: 'json',
+        success: function(data) {
+          console.log(data);
+          $.ajax({
+            type: 'POST',
+            url: '/cart/add.js',
+            data: {
+              quantity: 1,
+              id: item_id
+            },
+            dataType: 'json',
+            success: function(data) {
+              $.ajax({
+                type: 'POST',
+                url: '/cart.js',
+                dataType: 'json',
+                success: function(data) {
+                  var total_price = data.original_total_price;
+                  total_price = (total_price/100).toFixed(2);
+                  $('.cart-price').text('$'+total_price+' USD');
+                }
+              });
+            }
+          });
+        }
+      });
+    }); 
+    $('.minus').click(function(e){
+      e.preventDefault();
+      var item_id = $(this).attr('id');
+      $.ajax({
+        type: 'POST',
+        url: '/cart.js',
+        dataType: 'json',
+        success: function(data) {
+          $.each(data.items, function(index,value) {
+            if(value.id == item_id)
+            {
+              var a = 'updates['+item_id+']='+(value.quantity-1);
+              $.ajax({
+                type: 'POST',
+                url: '/cart/update.js',
+                data: a,
+                dataType: 'json',
+                success: function(data) {
+                  $.ajax({
+                    type: 'POST',
+                    url: '/cart.js',
+                    dataType: 'json',
+                    success: function(data) {
+                      var total_price = data.original_total_price;
+                      total_price = (total_price/100).toFixed(2);
+                      $('.cart-price').text('$'+total_price+' USD');
+                      if(total_price == 0.00 ){
+                       	location.reload(); 
+                      }
+                    }
+                  });
+                }
+              });
+            }
+          });
+        }
+      });
+    });
+  });
+</script>

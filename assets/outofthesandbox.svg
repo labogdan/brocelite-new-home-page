@@ -1,0 +1,18 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2014 by original authors @ fontello.com</metadata>
+<defs>
+<font id="outofthesandbox" horiz-adv-x="1000" >
+<font-face font-family="outofthesandbox" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="cart" unicode="&#xe800;" d="m150 0q0 40 30 70t70 30q42 0 71-30t29-70q0-42-29-71t-71-29q-40 0-70 29t-30 71z m500 0q0 40 30 70t70 30q42 0 71-30t29-70q0-42-29-71t-71-29q-40 0-70 29t-30 71z m-322 236q-36-10-34-23t44-13l562 0 0-76q0-20-20-20l-654 0q-20 0-20 20l0 76-10 46-98 454-98 0 0 80q0 20 20 20l156 0q20 0 20-20l0-86 704 0 0-274q0-22-18-26z" horiz-adv-x="900" />
+<glyph glyph-name="search" unicode="&#xe801;" d="m772 78q30-34 6-62l-46-46q-36-32-68 0l-190 190q-74-42-156-42-128 0-223 95t-95 223 90 219 218 91 224-95 96-223q0-88-46-162z m-678 358q0-88 68-156t156-68 151 63 63 153q0 88-68 155t-156 67-151-63-63-151z" horiz-adv-x="789" />
+<glyph glyph-name="check" unicode="&#xe802;" d="m249 0q-34 0-56 28l-180 236q-16 24-12 52t26 46 51 14 47-28l118-154 296 474q16 24 43 30t53-8q24-16 30-43t-8-53l-350-560q-20-32-56-32z" horiz-adv-x="667" />
+<glyph glyph-name="bag" unicode="&#xe803;" d="m835 668q28-26 24-60l-98-648q-8-30-38-30l-586 0q-28 0-40 30-94 620-96 648-5 34 22 60 6 6 54 43t56 43q18 16 56 16l480 0q38 0 56-16 78-58 110-86z m-406-436q56 0 98 34t63 89 30 89 13 66l-92 0q-38-188-112-188t-112 188l-92 0q46-278 204-278z m-352 368l704 0-110 116-484 0z" horiz-adv-x="859" />
+<glyph glyph-name="right-open-mini" unicode="&#xe804;" d="m13 180l158 170-158 172q-26 26 0 48 26 26 48 0l192-194q24-26 0-50l-192-194q-22-26-48 0-26 22 0 48z" horiz-adv-x="265" />
+<glyph glyph-name="menu" unicode="&#xe80d;" d="m650 400q22 0 36-15t14-35-15-35-35-15l-600 0q-20 0-35 15t-15 35 14 35 36 15l600 0z m-600 100q-20 0-35 15t-15 35 14 35 36 15l600 0q22 0 36-15t14-35-15-35-35-15l-600 0z m600-300q22 0 36-15t14-35-15-35-35-15l-600 0q-20 0-35 15t-15 35 14 35 36 15l600 0z" horiz-adv-x="700" />
+<glyph glyph-name="down-arrow" unicode="&#xe813;" d="m405 470q22 26 48 0 26-22 0-48l-196-192q-22-22-48 0l-196 192q-26 26 0 48 24 24 50 0l170-156z" horiz-adv-x="466" />
+</font>
+</defs>
+</svg>

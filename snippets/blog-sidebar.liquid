@@ -1,0 +1,63 @@
+{% if settings.sidebar_enabled %}
+  <div class="sidebar is-4 column">
+    <div class="sidebar_content">
+      {% if settings.blog_search %}
+        <div class="sidebar-section">
+          <h4>Search</h4>
+
+        <form class="blog_search" action="/search">
+          <input type="hidden" name="type" value="article" />
+          <span class="icon-search"></span>
+          <input type="text" name="q" class="search_box" placeholder="to search, type and hit enter" autocapitalize="off" autocomplete="off" autocorrect="off" value="{{ search.terms }}" />
+        </form>
+      </div>
+      {% endif %}
+
+
+
+      {% if settings.display_recent_articles %}
+        <div class="sidebar-section">
+          <h4>Recent Entries</h4>
+        <ul class="blog_list recent_articles">
+          {% for article in blogs[blog-sidebar].articles limit:10 %}
+            <li>
+              <a href="{{ article.url }}" title="{{ article.title | escape }}">{{ article.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
+            {% if settings.blog_newsletter %}
+        <div class="sidebar-section">
+          <h4>{{ 'blogs.sidebar.subscribe' | t }}</h4>
+        <p>Learn more about how to protect and love your family from our monthly newsletter.</p>
+        {% include 'newsletter-sidebar' %}
+      </div>
+      {% endif %}
+
+    {% if settings.blog_sidebar_tags and blogs[blog-sidebar].all_tags != blank %}
+      <div class="sidebar-section">
+        <h4>{{ 'blogs.sidebar.categories' | t }}</h4>
+      <ul class="blog_list ">
+        {% for tag in blogs[blog-sidebar].all_tags %}
+          <li>
+            <a href="{{ shop.url}}/blogs/{{ blogs[blog-sidebar].handle }}/tagged/{{ tag | handleize }}" title="{{ blogs[blog-sidebar].title }} {{ 'blogs.general.tagged' | t }} {{ tag | escape }}">{{ tag }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+      {% if settings.blog_content_page != blank %}
+      {% endif %}
+      </div>
+    {% endif %}
+
+    {% if settings.blog_content_page != blank %}
+      <div class="sidebar-section">
+      <h4>{{ pages[settings.blog_content_page].title }}</h4>
+      {{ pages[settings.blog_content_page].content }}
+      </div>
+    {% endif %}
+
+    </div>
+  </div>
+{% endif %}

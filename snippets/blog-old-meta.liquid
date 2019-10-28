@@ -1,0 +1,24 @@
+<div class="{% if settings.sidebar_enabled %}two{% else %}seven{% endif %} columns alpha article">
+        <p class="blog_meta">
+          {% if settings.blog_author %}
+            <span>{{ 'blogs.article.by_author' | t: author: article.author }}</span>
+          {% endif %}
+
+          {% if settings.blog_date %}
+            <span class="date">{{ article.published_at | date: "%d" }}</span>
+            <span class="month">{{ article.published_at | date: "%b %y" }}</span>
+          {% endif %}
+
+          {% if settings.blog_comment_count %}
+            {% if settings.disqus_enabled %}
+              <span>
+                <a href="{{ article.url }}#disqus_thread" data-disqus-identifier="{{ article.id }}" class="disqus-comment-count">{{ 'blogs.counts.comments_with_count' | t: count: 0 }}</a>
+              </span>
+            {% elsif article.comments_enabled? and article.comments_count > 0 %}
+              <span>
+                <a href="{{ article.url }}#comments">{{ 'blogs.counts.comments_with_count' | t: count: article.comments_count }}</a>
+              </span>
+            {% endif %}
+          {% endif %}
+        </p>
+    </div>
